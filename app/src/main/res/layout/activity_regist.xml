@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/login"
+    android:orientation="vertical"
+    tools:context=".RegistActivity">
+
+    <EditText
+        android:id="@+id/et_reg_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="@null"
+        android:drawableLeft="@mipmap/register_icon_phone_n_hdpi"
+        android:drawableBottom="@drawable/edit_shape"
+        android:drawablePadding="15dp"
+        android:hint="@string/phonenum"
+        android:maxLines="1"
+        android:padding="20dp"
+        android:textColorHint="#fff" />
+
+    <EditText
+        android:id="@+id/et_reg_yan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableLeft="@mipmap/login_icon_verification_code_n_hdpi"
+        android:drawableBottom="@drawable/edit_shape"
+        android:drawablePadding="15dp"
+        android:hint="@string/code"
+        android:maxLines="1"
+        android:padding="20dp"
+        android:textColorHint="#fff" />
+
+    <EditText
+        android:id="@+id/et_reg_pwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:drawableLeft="@mipmap/register_icon_lock_n_hdpi"
+        android:drawableRight="@mipmap/login_icon_eye_n_hdhpi"
+        android:drawableBottom="@drawable/edit_shape"
+        android:drawablePadding="15dp"
+        android:hint="@string/password"
+        android:maxLines="1"
+        android:padding="20dp"
+        android:textColorHint="#fff" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/text_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ck_rem_pwd"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:padding="20dp"
+            android:text="@string/lijideng"
+            android:textColor="#fff"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_regist"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:background="@drawable/shape"
+        android:text="@string/regist"
+        android:textColor="#ff5f71"
+        android:textSize="18sp" />
+
+</LinearLayout>
