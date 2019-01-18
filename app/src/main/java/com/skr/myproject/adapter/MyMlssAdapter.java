@@ -13,9 +13,14 @@ import com.skr.myproject.bean.MyData;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class MyMlssAdapter extends BaseAdapter {
     private Context context;
     List<MyData.ResultBean.MlssBean.CommodityListBeanXX> mlssList;
+    private Unbinder bind;
 
     public MyMlssAdapter(Context context, List<MyData.ResultBean.MlssBean.CommodityListBeanXX> mlssList) {
         this.context = context;
@@ -42,22 +47,31 @@ public class MyMlssAdapter extends BaseAdapter {
         ViewHolder holder;
         if (convertView == null) {
             convertView = View.inflate(context, R.layout.mlsh_grid_layout, null);
-            holder = new ViewHolder();
-            holder.mlss_img = convertView.findViewById(R.id.mlsh_img);
-            holder.mlss_title = convertView.findViewById(R.id.mlsh_title);
-            holder.mlss_price = convertView.findViewById(R.id.mlsh_price);
+            holder = new ViewHolder(convertView);
+            bind = ButterKnife.bind(convertView);
+
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        ImageLoader.getInstance().displayImage(mlssList.get(position).getMasterPic(), holder.mlss_img);
-        holder.mlss_title.setText(mlssList.get(position).getCommodityName());
-        holder.mlss_price.setText("￥:"+mlssList.get(position).getPrice());
+        ImageLoader.getInstance().displayImage(mlssList.get(position).getMasterPic(), holder.mlshImg);
+        holder.mlshTitle.setText(mlssList.get(position).getCommodityName());
+        holder.mlshPrice.setText("￥:" + mlssList.get(position).getPrice());
         return convertView;
     }
 
+
+
     class ViewHolder {
-        private ImageView mlss_img;
-        private TextView mlss_title, mlss_price;
+        @BindView(R.id.mlsh_img)
+        ImageView mlshImg;
+        @BindView(R.id.mlsh_title)
+        TextView mlshTitle;
+        @BindView(R.id.mlsh_price)
+        TextView mlshPrice;
+
+        ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }

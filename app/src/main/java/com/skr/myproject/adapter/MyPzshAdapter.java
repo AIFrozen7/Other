@@ -13,9 +13,14 @@ import com.skr.myproject.bean.MyData;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class MyPzshAdapter extends BaseAdapter {
     private Context context;
     private List<MyData.ResultBean.PzshBean.CommodityListBeanX> pzshList;
+    private Unbinder bind;
 
     public MyPzshAdapter(Context context, List<MyData.ResultBean.PzshBean.CommodityListBeanX> pzshList) {
         this.context = context;
@@ -42,22 +47,30 @@ public class MyPzshAdapter extends BaseAdapter {
         ViewHolder holder;
         if (convertView == null) {
             convertView = View.inflate(context, R.layout.pzsh_grid_layout, null);
-            holder = new ViewHolder();
-            holder.pzsh_img = convertView.findViewById(R.id.pzsh_img);
-            holder.pzsh_title = convertView.findViewById(R.id.pzsh_title);
-            holder.pzsh_price = convertView.findViewById(R.id.pzsh_price);
+            holder = new ViewHolder(convertView);
+            bind = ButterKnife.bind(convertView);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        ImageLoader.getInstance().displayImage(pzshList.get(position).getMasterPic(), holder.pzsh_img);
-        holder.pzsh_title.setText(pzshList.get(position).getCommodityName());
-        holder.pzsh_price.setText("￥:"+pzshList.get(position).getPrice());
+        ImageLoader.getInstance().displayImage(pzshList.get(position).getMasterPic(), holder.pzshImg);
+        holder.pzshTitle.setText(pzshList.get(position).getCommodityName());
+        holder.pzshPrice.setText("￥:" + pzshList.get(position).getPrice());
         return convertView;
     }
 
+
+
     class ViewHolder {
-        private ImageView pzsh_img;
-        private TextView pzsh_title, pzsh_price;
+        @BindView(R.id.pzsh_img)
+        ImageView pzshImg;
+        @BindView(R.id.pzsh_title)
+        TextView pzshTitle;
+        @BindView(R.id.pzsh_price)
+        TextView pzshPrice;
+
+        ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
     }
 }
