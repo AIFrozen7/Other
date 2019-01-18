@@ -1,8 +1,8 @@
 package com.skr.myproject;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -15,47 +15,33 @@ import com.skr.myproject.bean.RegistBean;
 import com.skr.myproject.regist.presenter.RegistPresenter;
 import com.skr.myproject.regist.view.IRegistView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
+
 public class RegistActivity extends AppCompatActivity implements IRegistView {
 
-    private EditText et_reg_name;
-    private EditText et_reg_pwd;
-    private EditText et_reg_yan;
-    private TextView text_login;
-    private Button btn_regist;
+    @BindView(R.id.et_reg_name)
+    EditText etRegName;
+    @BindView(R.id.et_reg_yan)
+    EditText etRegYan;
+    @BindView(R.id.et_reg_pwd)
+    EditText etRegPwd;
+    @BindView(R.id.text_login)
+    TextView textLogin;
+    @BindView(R.id.btn_regist)
+    Button btnRegist;
+
     private RegistPresenter registPresenter;
+    private Unbinder bind;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regist);
-        et_reg_name = findViewById(R.id.et_reg_name);
-        et_reg_yan = findViewById(R.id.et_reg_yan);
-        et_reg_pwd = findViewById(R.id.et_reg_pwd);
-        btn_regist = findViewById(R.id.btn_regist);
-        text_login = findViewById(R.id.text_login);
-
+        bind = ButterKnife.bind(RegistActivity.this);
         registPresenter = new RegistPresenter(this);
-        btn_regist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = et_reg_name.getText().toString();
-                String pwd = et_reg_pwd.getText().toString();
-                if (TextUtils.isEmpty(name)||TextUtils.isEmpty(pwd)){
-                    Toast.makeText(RegistActivity.this, "输入内容不能为空", Toast.LENGTH_SHORT).show();
-                }else{
-                    registPresenter.registPre(name,pwd);
-                }
-            }
-        });
-        text_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RegistActivity.this,MainActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
     }
 
     @Override
@@ -66,11 +52,11 @@ public class RegistActivity extends AppCompatActivity implements IRegistView {
                 Gson gson = new Gson();
                 RegistBean registBean = gson.fromJson(msg, RegistBean.class);
                 String status = registBean.getStatus();
-                if (status.equals("0000")){
-                    Intent intent = new Intent(RegistActivity.this,MainActivity.class);
+                if (status.equals("0000")) {
+                    Intent intent = new Intent(RegistActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
-                }else{
+                } else {
                     Toast.makeText(RegistActivity.this, registBean.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
@@ -80,5 +66,37 @@ public class RegistActivity extends AppCompatActivity implements IRegistView {
     @Override
     public void jumpActivity() {
 
+    }
+
+    @OnClick({R.id.et_reg_name, R.id.et_reg_yan, R.id.et_reg_pwd, R.id.text_login, R.id.btn_regist})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.et_reg_name:
+                break;
+            case R.id.et_reg_yan:
+                break;
+            case R.id.et_reg_pwd:
+                break;
+            case R.id.text_login:
+                Intent intent = new Intent(RegistActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                break;
+            case R.id.btn_regist:
+                String name = etRegName.getText().toString();
+                String pwd = etRegPwd.getText().toString();
+                if (TextUtils.isEmpty(name) || TextUtils.isEmpty(pwd)) {
+                    Toast.makeText(RegistActivity.this, "输入内容不能为空", Toast.LENGTH_SHORT).show();
+                } else {
+                    registPresenter.registPre(name, pwd);
+                }
+                break;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bind.unbind();
     }
 }

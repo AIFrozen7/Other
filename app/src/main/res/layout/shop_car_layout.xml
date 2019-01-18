@@ -1,7 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#0f0"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-</LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/shopcart_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#fff"
+        android:padding="10dp">
+
+        <CheckBox
+            android:id="@+id/shop_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="全选/全不选"
+            android:textColor="#666"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/shop_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/shop_checkbox"
+            android:padding="10dp"
+            android:text="总价:"
+            android:textColor="#f00"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/shop_jie"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/btn_jie_shape"
+            android:padding="10dp"
+            android:text="去结算(0)"
+            android:textColor="#fff" />
+    </RelativeLayout>
+
+</RelativeLayout>

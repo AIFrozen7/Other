@@ -15,9 +15,11 @@ import com.skr.myproject.fragment.SecondFragment;
 import com.skr.myproject.fragment.MemuFragment;
 import com.skr.myproject.fragment.ShopCarFragment;
 
+import butterknife.ButterKnife;
+
 public class ShowActivity extends AppCompatActivity {
 
-    private RelativeLayout relative;
+    private RelativeLayout relative_layout;
     private RadioGroup radio_group;
     private HomeFragment homeFragment;
     private SecondFragment secondFragment;
@@ -34,7 +36,8 @@ public class ShowActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show);
-        relative = findViewById(R.id.relative);
+        ButterKnife.bind(ShowActivity.this);
+        relative_layout = findViewById(R.id.relative_layout);
         radio_group = findViewById(R.id.radio_group);
         rb1 = findViewById(R.id.rb1);
         rb2 = findViewById(R.id.rb2);
@@ -45,7 +48,7 @@ public class ShowActivity extends AppCompatActivity {
         final FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         homeFragment = new HomeFragment();
-        transaction.add(R.id.relative,homeFragment);
+        transaction.add(R.id.relative_layout,homeFragment);
         transaction.commit();
         radio_group.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -72,7 +75,7 @@ public class ShowActivity extends AppCompatActivity {
                     case R.id.rb1:
                         if (homeFragment == null){
                             homeFragment = new HomeFragment();
-                            beginTransaction.add(R.id.relative,homeFragment);
+                            beginTransaction.add(R.id.relative_layout,homeFragment);
                         }else{
                             beginTransaction.show(homeFragment);
                         }
@@ -80,7 +83,7 @@ public class ShowActivity extends AppCompatActivity {
                     case R.id.rb2:
                         if (secondFragment == null){
                             secondFragment = new SecondFragment();
-                            beginTransaction.add(R.id.relative,secondFragment);
+                            beginTransaction.add(R.id.relative_layout,secondFragment);
                         }else{
                             beginTransaction.show(secondFragment);
                         }
@@ -88,7 +91,7 @@ public class ShowActivity extends AppCompatActivity {
                     case R.id.rb3:
                         if (shopCarFragment == null){
                             shopCarFragment = new ShopCarFragment();
-                            beginTransaction.add(R.id.relative,shopCarFragment);
+                            beginTransaction.add(R.id.relative_layout,shopCarFragment);
                         }else{
                             beginTransaction.show(shopCarFragment);
                         }
@@ -96,7 +99,7 @@ public class ShowActivity extends AppCompatActivity {
                     case R.id.rb4:
                         if (memuFragment== null){
                             memuFragment = new MemuFragment();
-                            beginTransaction.add(R.id.relative,memuFragment);
+                            beginTransaction.add(R.id.relative_layout,memuFragment);
                         }else{
                             beginTransaction.show(memuFragment);
                         }
@@ -105,7 +108,7 @@ public class ShowActivity extends AppCompatActivity {
 
                         if (mineFragment== null){
                             mineFragment = new MineFragment();
-                            beginTransaction.add(R.id.relative,mineFragment);
+                            beginTransaction.add(R.id.relative_layout,mineFragment);
                         }else{
                             beginTransaction.show(mineFragment);
 

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".LoginAndShareAtivity">
+
+    <ImageView
+        android:id="@+id/qq_login"
+        android:layout_width="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@mipmap/umeng_socialize_qq"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/qq_share"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:background="@mipmap/umeng_socialize_menu_default"
+        android:layout_height="wrap_content" />
+
+
+    <TextView
+        android:id="@+id/tv_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -13,7 +13,7 @@ public class HomeModel implements IHomeModel{
 
     @Override
     public void getData(String url, final ModelInterface modelInterface) {
-        OkHttp.okHttpGet(url, new Callback() {
+        OkHttp.okHttpGet(url,new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
 

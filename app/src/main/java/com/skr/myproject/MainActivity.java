@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.skr.myproject.login.view.ILoginView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 public class MainActivity extends AppCompatActivity implements ILoginView {
@@ -33,6 +35,9 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
     TextView textReg;
     @BindView(R.id.btn_login)
     Button btnLogin;
+    @BindView(R.id.img_login)
+    ImageView imgLogin;
+
 
     private LoginPresenter loginPresenter;
     private SharedPreferences preferences;
@@ -115,5 +120,11 @@ public class MainActivity extends AppCompatActivity implements ILoginView {
     protected void onDestroy() {
         super.onDestroy();
         bind.unbind();
+    }
+
+    @OnClick(R.id.img_login)
+    public void onViewClicked() {
+        Intent intent = new Intent(MainActivity.this,LoginAndShareAtivity.class);
+        startActivity(intent);
     }
 }

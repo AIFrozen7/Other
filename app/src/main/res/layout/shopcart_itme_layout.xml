@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:layout_centerVertical="true"
+    android:layout_margin="15dp"
+    android:background="@drawable/item_back_shape"
+    android:gravity="center_vertical"
+    android:padding="10dp">
+
+    <CheckBox
+        android:id="@+id/goods_checkbox"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        android:padding="10dp" />
+
+    <ImageView
+        android:id="@+id/goods_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_toRightOf="@+id/goods_checkbox"
+        android:padding="10dp"
+        android:src="@mipmap/ic_launcher_round" />
+
+    <LinearLayout
+        android:id="@+id/linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/goods_img"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/googs_title"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:maxLines="2"
+            android:padding="10dp"
+            android:text="fahdflahdf"
+            android:textSize="20dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+
+            <TextView
+                android:id="@+id/goods_price"
+                android:layout_width="wrap_content"
+                android:layout_height="80dp"
+                android:layout_alignParentLeft="true"
+                android:padding="10dp"
+                android:text="￥:188"
+                android:textColor="#f00"
+                android:textSize="20dp" />
+
+            <com.skr.myproject.customview.CustomView
+                android:id="@+id/custom_view"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                app:num="20"></com.skr.myproject.customview.CustomView>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</RelativeLayout>

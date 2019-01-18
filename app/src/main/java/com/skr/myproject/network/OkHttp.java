@@ -5,6 +5,7 @@ import android.os.Environment;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cache;
@@ -18,13 +19,11 @@ import okhttp3.Response;
 
 public class OkHttp {
 
-    private static OkHttpClient okHttpClient;
-    private static Request request;
-    private static OkHttpClient client;
-    private static RequestBody build;
-    private static Request requestBuild;
+
+
     private static volatile OkHttp instance;
     private final OkHttpClient client1;
+    private static RequestBody build;
 
     //添加拦截
     private Interceptor getAppInterceptor() {
@@ -62,19 +61,19 @@ public class OkHttp {
     }
 
 
-    public static void okHttpGet(String url, Callback callback) {
+    public static void okHttpGet(String url,Callback callback) {
         //创建okhttpclient
-        okHttpClient = new OkHttpClient();
+        OkHttpClient  okHttpClient = new OkHttpClient();
         //创建request
-        request = new Request.Builder().url(url).method("GET", null).build();
+        Request request = new Request.Builder().url(url).method("GET", null).build();
         okHttpClient.newCall(request).enqueue(callback);
 
     }
 
     public static void okHttpPost(String url, String name, String pwd, Callback callback) {
-        client = new OkHttpClient();
+        OkHttpClient  client = new OkHttpClient();
         build = new FormBody.Builder().add("phone", name).add("pwd", pwd).build();
-        requestBuild = new Request.Builder().url(url).post(OkHttp.build).build();
+        Request requestBuild = new Request.Builder().url(url).post(OkHttp.build).build();
         client.newCall(requestBuild).enqueue(callback);
     }
 }

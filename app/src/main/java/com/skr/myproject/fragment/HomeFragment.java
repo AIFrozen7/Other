@@ -1,16 +1,22 @@
 package com.skr.myproject.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -18,12 +24,15 @@ import com.google.gson.Gson;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.skr.myproject.BannerWebActivity;
+import com.skr.myproject.DetailsActivity;
 import com.skr.myproject.R;
 import com.skr.myproject.adapter.MyMlssAdapter;
 import com.skr.myproject.adapter.MyPzshAdapter;
 import com.skr.myproject.adapter.MyRxxpAdapter;
 import com.skr.myproject.bean.MyBanner;
 import com.skr.myproject.bean.MyData;
+import com.skr.myproject.bean.ShopDetails;
 import com.skr.myproject.home.presenter.HomePresenter;
 import com.skr.myproject.home.view.IHomeView;
 import com.stx.xhb.xbanner.XBanner;
@@ -34,9 +43,9 @@ import com.zhouwei.mzbanner.holder.MZViewHolder;
 
 import java.util.List;
 
-public class HomeFragment extends Fragment implements IHomeView {
+public class HomeFragment extends Fragment implements IHomeView{
 
-   // private XBanner xbanner;
+    // private XBanner xbanner;
     private GridView grid_view_rxxp;
     private ListView list_view_mlss;
     private GridView grid_view_pzsh;
@@ -52,10 +61,12 @@ public class HomeFragment extends Fragment implements IHomeView {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_layout, container, false);
         //xbanner = view.findViewById(R.id.xbanner);
-        mzbanner = view.findViewById(R.id.banner);
+        mzbanner = view.findViewById(R.id.mz_banner);
         grid_view_rxxp = view.findViewById(R.id.grid_view_rxxp);
         list_view_mlss = view.findViewById(R.id.list_view_mlss);
         grid_view_pzsh = view.findViewById(R.id.grid_view_pzsh);
+
+
 
         //初始化presenter
         HomePresenter homePresenter = new HomePresenter(this);
@@ -71,21 +82,60 @@ public class HomeFragment extends Fragment implements IHomeView {
         pzshList = myData.getResult().getPzsh().get(0).getCommodityList();
         rxxpList = myData.getResult().getRxxp().get(0).getCommodityList();
 
+
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 if (rxxpList != null){
                     MyRxxpAdapter rxxpAdapter = new MyRxxpAdapter(getActivity(),rxxpList);
                     grid_view_rxxp.setAdapter(rxxpAdapter);
+                    grid_view_rxxp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            Intent intent = new Intent(getActivity(),DetailsActivity.class);
+
+                            intent.putExtra("id",rxxpList.get(position).getCommodityId()+"");
+                            //   Toast.makeText(getActivity(), rxxpList.get(position).getCommodityId(), Toast.LENGTH_SHORT).show();
+                            //Log.i("bb", "onItemClick: "+rxxpList.get(position).getCommodityId());
+                            startActivity(intent);
+                        }
+                    });
                 }
                 if (mlssList != null){
                     MyMlssAdapter myMlssAdapter = new MyMlssAdapter(getActivity(),mlssList);
                     list_view_mlss.setAdapter(myMlssAdapter);
+                    list_view_mlss.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            Intent intent = new Intent(getActivity(),DetailsActivity.class);
+
+                            intent.putExtra("id",mlssList.get(position).getCommodityId()+"");
+                            //   Toast.makeText(getActivity(), rxxpList.get(position).getCommodityId(), Toast.LENGTH_SHORT).show();
+                            //Log.i("bb", "onItemClick: "+rxxpList.get(position).getCommodityId());
+                            startActivity(intent);
+                        }
+                    });
                 }
                 if (pzshList != null){
                     MyPzshAdapter pzshAdapter = new MyPzshAdapter(getActivity(),pzshList);
                     grid_view_pzsh.setAdapter(pzshAdapter);
+                    grid_view_pzsh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                            Intent intent = new Intent(getActivity(),DetailsActivity.class);
+
+                            intent.putExtra("id",pzshList.get(position).getCommodityId()+"");
+                            //   Toast.makeText(getActivity(), rxxpList.get(position).getCommodityId(), Toast.LENGTH_SHORT).show();
+                            //Log.i("bb", "onItemClick: "+rxxpList.get(position).getCommodityId());
+                            startActivity(intent);
+                        }
+                    });
                 }
+
+
 
             }
         });
@@ -96,22 +146,13 @@ public class HomeFragment extends Fragment implements IHomeView {
     @Override
     public void getBannerData(String banner) {
         Gson gson = new Gson();
-        MyBanner myBanner = gson.fromJson(banner, MyBanner.class);
+        final MyBanner myBanner = gson.fromJson(banner, MyBanner.class);
         result = myBanner.getResult();
         getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-               /* xbanner.setData(result,null);
-                xbanner.setmAdapter(new XBanner.XBannerAdapter() {
-                    @Override
-                    public void loadBanner(XBanner banner, View view, int position) {
-                        Glide.with(getActivity()).load(result.get(position).getImageUrl()).into((ImageView) view);
-                    }
-                });
-                xbanner.setPageTransformer(Transformer.Default);
-                xbanner.setPageChangeDuration(500);*/
-                mzbanner.setPages(result, new MZHolderCreator<BannerViewHolder>() {
 
+                mzbanner.setPages(result, new MZHolderCreator<BannerViewHolder>() {
                     @Override
                     public BannerViewHolder createViewHolder() {
                         return new BannerViewHolder();
@@ -120,11 +161,23 @@ public class HomeFragment extends Fragment implements IHomeView {
                 mzbanner.setDelayedTime(500);
                 mzbanner.setDuration(500);
 
+               mzbanner.setOnClickListener(new View.OnClickListener() {
+                   @Override
+                   public void onClick(View v) {
+
+                       Intent intent = new Intent(getActivity(),BannerWebActivity.class);
+                       intent.putExtra("url", result.get(v.getId()).getJumpUrl());
+                       startActivity(intent);
+                   }
+               });
+
+
+
             }
         });
     }
 
-   @Override
+    @Override
     public void onResume() {
         super.onResume();
         mzbanner.start();
@@ -135,6 +188,9 @@ public class HomeFragment extends Fragment implements IHomeView {
         super.onStop();
         mzbanner.pause();
     }
+
+
+
 
     private class BannerViewHolder implements MZViewHolder {
         @Override
@@ -147,7 +203,6 @@ public class HomeFragment extends Fragment implements IHomeView {
 
         @Override
         public void onBind(Context context, int i, Object o) {
-
             ImageLoader.getInstance().displayImage(result.get(i).getImageUrl(),banner_image);
 
         }

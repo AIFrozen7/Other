@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/item_back_shape"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/top_two_relativity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/circle_two_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/circle_texttwo_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="6dp"
+            android:layout_toRightOf="@+id/circle_two_img"
+            android:text="aaaa"
+            android:textColor="#666666"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/circle_texttwo_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="15dp"
+            android:layout_marginLeft="6dp"
+            android:text="2018"
+            android:textColor="#666666"
+            android:textSize="10sp" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/circle_texttwo_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_two_relativity"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:text="title"
+        android:textColor="#666666"
+        android:textSize="12sp" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_two_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/circle_texttwo_title"></android.support.v7.widget.RecyclerView>
+
+
+    <TextView
+        android:id="@+id/text_two_prise"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/recycler_two_view"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:text="321" />
+
+
+    <ImageView
+        android:id="@+id/circle_img_prise"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/recycler_two_view"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="50dp"
+        android:src="@mipmap/btn_prise" />
+
+
+</RelativeLayout>

@@ -12,7 +12,7 @@
         android:id="@+id/et_login_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="100dp"
         android:background="@null"
         android:drawableLeft="@mipmap/register_icon_phone_n_hdpi"
         android:drawableBottom="@drawable/edit_shape"
@@ -61,12 +61,21 @@
             android:textSize="14sp" />
     </RelativeLayout>
 
+    <ImageView
+        android:id="@+id/img_login"
+        android:background="@mipmap/umeng_socialize_qq"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="40dp"
+        android:clickable="true"
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
     <Button
         android:id="@+id/btn_login"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
         android:background="@drawable/shape"
         android:text="@string/login"
         android:textColor="#ff5f71"

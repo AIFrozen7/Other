@@ -1,20 +1,24 @@
 package com.skr.myproject.home.presenter;
 
+import com.skr.myproject.DetailsActivity;
 import com.skr.myproject.api.Api;
 import com.skr.myproject.fragment.HomeFragment;
 import com.skr.myproject.home.model.HomeModel;
 import com.skr.myproject.home.model.IHomeModel;
 import com.skr.myproject.login.presenter.ILoginPresenter;
 
-public class HomePresenter implements IHomePresenter{
+public class HomePresenter implements IHomePresenter {
 
-   HomeFragment homeFragment;
+    HomeFragment homeFragment;
+
     private final HomeModel homeModel;
 
     public HomePresenter(HomeFragment homeFragment) {
         this.homeFragment = homeFragment;
         homeModel = new HomeModel();
     }
+
+
 
     @Override
     public void getPresenterData() {
@@ -41,5 +45,6 @@ public class HomePresenter implements IHomePresenter{
             }
         });
     }
+
 
 }
